@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Taskflow — Dev Front</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body { font-family: system-ui, Arial, sans-serif; margin: 24px; line-height: 1.35; }
+      input, button { padding: 8px 10px; margin: 4px 0; }
+      .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+      .block { margin: 16px 0; }
+      pre { background: #111; color: #7CFC9A; padding: 12px; border-radius: 8px; overflow: auto; }
+      small { color: #666; }
+      .pill { background:#eef; padding:4px 8px; border-radius:999px; }
+      
+      /* Task table styles */
+      .tasks-table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+      .tasks-table th, .tasks-table td { padding: 8px 12px; text-align: left; border-bottom: 1px solid #ddd; }
+      .tasks-table th { background: #f5f5f5; font-weight: 600; }
+      .tasks-table tr:hover { background: #f9f9f9; }
+      .status-pending { color: #f59e0b; font-weight: 500; }
+      .status-done { color: #10b981; font-weight: 500; }
+      .status-failed { color: #ef4444; font-weight: 500; }
+      .task-id { font-family: monospace; font-size: 0.9em; }
+      .btn-small { padding: 4px 8px; font-size: 0.85em; margin: 2px; }
+      .auto-refresh-on { background: #10b981 !important; color: white; }
+    </style>
+  </head>
+  <body>
+    <h1>Taskflow — Dev Front</h1>
+
+    <div class="block">
+      <div class="row">
+        <label>BASE:&nbsp;<input id="base" size="80" placeholder="https://.../dev" /></label>
+      </div>
+      <div class="row">
+        <label>JWT:&nbsp;<input id="token" size="80" placeholder="Bearer token (ID Token)" /></label>
+        <button id="paste">Paste from clipboard</button>
+        <span id="whoami" class="pill" hidden></span>
+      </div>
+      <div class="row">
+        <button id="signin">Sign in with Cognito</button>
+        <button id="signout">Sign out</button>
+        <small>Auth uses Cognito Hosted UI + PKCE; API expects <b>ID Token</b> in Authorization header.</small>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="row">
+        <button id="btnHealth">GET /health</button>
+        <button id="btnMe">GET /me</button>
+        <input id="limit" type="number" value="5" min="1" max="50" style="width:80px" />
+        <button id="btnList">GET /tasks?limit=...</button>
+      </div>
+      <div class="row">
+        <input id="taskId" placeholder="Task ID" style="width:300px" />
+        <button id="btnGetTask">GET /tasks/{id}</button>
+      </div>
+      <div class="row">
+        <button id="btnDownloadOriginal">Download Original File</button>
+        <button id="btnDownloadResult">Download Result (JSON)</button>
+        <button id="btnViewResult">View Result</button>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="row">
+        <input id="file" type="file" />
+        <button id="btnUpload">Upload file (presign → PUT) & create task</button>
+      </div>
+      <small>Pipeline: POST /files/presign → PUT to S3 → POST /tasks with file_key</small>
+    </div>
+
+    <div class="block">
+      <h3>Tasks</h3>
+      <div class="row">
+        <button id="btnRefreshTasks">Refresh Tasks</button>
+        <button id="btnAutoRefresh" style="background:#eef">Auto-refresh: OFF</button>
+      </div>
+      <div id="tasksTable" style="margin-top: 16px;">
+        <p>Click "Refresh Tasks" to load your tasks...</p>
+      </div>
+    </div>
+
+    <div class="block">
+      <h3>Response</h3>
+      <pre id="out">Click buttons above…</pre>
+    </div>
+
+    <!-- Vite entry -->
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

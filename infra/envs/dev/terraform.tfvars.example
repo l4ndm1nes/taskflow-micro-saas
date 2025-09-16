@@ -1,0 +1,61 @@
+# AWS Configuration
+aws_region  = "eu-central-1"
+aws_profile = "terraform-dev"
+
+# Project Configuration
+project_name = "taskflow"
+stage        = "dev"
+
+# Backend Configuration (for reference, configured in main.tf)
+backend_bucket           = "tf-state-taskflow-s3"
+backend_dynamodb_table   = "tf-lock-taskflow"
+
+# Lambda Configuration
+lambda_runtime     = "python3.11"
+lambda_timeout     = 10
+lambda_memory_size = 256
+
+# API Gateway Configuration
+api_throttling_rate_limit  = 100
+api_throttling_burst_limit = 200
+
+# Logging Configuration
+log_retention_days = 14
+
+# Task Configuration
+task_ttl_days = 7
+
+# CORS Configuration
+cors_allowed_origins = [
+  "http://localhost:5173",
+  "http://127.0.0.1:5500",
+  "http://localhost:8080",
+  "*"
+]
+
+# S3 Lifecycle Configuration
+s3_lifecycle_uploads_expiration_days = 30
+s3_lifecycle_results_expiration_days = 90
+s3_lifecycle_tmp_expiration_days     = 1
+s3_transition_to_ia_days             = 30
+s3_transition_to_glacier_days        = 90
+
+# SQS Configuration
+sqs_visibility_timeout_seconds = 300
+sqs_message_retention_seconds  = 1209600  # 14 days
+sqs_max_receive_count         = 3
+
+# Cognito Configuration
+cognito_password_minimum_length = 8
+
+# Common Tags
+tags = {
+  Project     = "TaskFlow"
+  Environment = "dev"
+  ManagedBy   = "Terraform"
+}
+
+# Instructions:
+# 1. Copy this file to terraform.tfvars
+# 2. Adjust values as needed for your environment
+# 3. Run: terraform init && terraform plan
