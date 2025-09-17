@@ -96,10 +96,12 @@ jobs:
     - name: Build frontend
       working-directory: ./web/dev/frontend
       run: |
+        CLOUDFRONT_DOMAIN=$(terraform -chdir=../../../infra/envs/dev output -raw cloudfront_domain)
         echo "VITE_API_BASE=${{ env.VITE_API_BASE }}" > .env.production
         echo "VITE_COGNITO_DOMAIN=${{ env.VITE_COGNITO_DOMAIN }}" >> .env.production
         echo "VITE_COGNITO_CLIENT_ID=${{ env.VITE_COGNITO_CLIENT_ID }}" >> .env.production
-        echo "VITE_COGNITO_REDIRECT=https://$(terraform -chdir=../../../infra/envs/dev output -raw cloudfront_domain)/" >> .env.production
+        echo "VITE_COGNITO_REDIRECT=https://${CLOUDFRONT_DOMAIN}/" >> .env.production
+        cat .env.production
         npm run build
 
     - name: Deploy to S3
