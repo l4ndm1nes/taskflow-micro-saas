@@ -110,6 +110,3 @@ resource "aws_iam_role_policy_attachment" "lambda_s3_attach" {
   policy_arn = aws_iam_policy.lambda_s3_policy.arn
 }
 
-output "s3_bucket_name" {
-  value = aws_s3_bucket.files.bucket
-}

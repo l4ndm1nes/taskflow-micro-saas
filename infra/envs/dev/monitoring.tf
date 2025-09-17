@@ -109,8 +109,3 @@ resource "aws_cloudwatch_metric_alarm" "dynamodb_throttles" {
   }
 }
 
-# Output SNS topic для подключения email уведомлений
-output "sns_alerts_topic_arn" {
-  value       = aws_sns_topic.alerts.arn
-  description = "SNS topic for alerts - subscribe your email here"
-}

@@ -32,6 +32,3 @@ resource "aws_iam_role_policy_attachment" "lambda_sqs_attach" {
   policy_arn = aws_iam_policy.lambda_sqs_policy.arn
 }
 
-output "sqs_queue_url" {
-  value = aws_sqs_queue.tasks.id
-}

@@ -36,10 +36,12 @@ resource "aws_cognito_user_pool_client" "app" {
   callback_urls = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
+    "https://${aws_cloudfront_distribution.frontend.domain_name}/",
   ]
   logout_urls = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
+    "https://${aws_cloudfront_distribution.frontend.domain_name}/",
   ]
 
   # Keep for CLI flows you already use
