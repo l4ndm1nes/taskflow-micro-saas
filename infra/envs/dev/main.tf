@@ -5,7 +5,6 @@ terraform {
     region         = "eu-central-1"
     dynamodb_table = "tf-lock-taskflow"
     encrypt        = true
-    profile        = "terraform-dev"
   }
   required_providers {
     aws     = { source = "hashicorp/aws", version = "~> 5.0" }
@@ -14,6 +13,5 @@ terraform {
 }
 
 provider "aws" {
-  region  = var.aws_region
-  profile = var.aws_profile
+  region = var.aws_region
 }

@@ -4,11 +4,6 @@ variable "aws_region" {
   default     = "eu-central-1"
 }
 
-variable "aws_profile" {
-  description = "AWS CLI profile to use"
-  type        = string
-  default     = "terraform-dev"
-}
 
 variable "project_name" {
   description = "Name of the project"

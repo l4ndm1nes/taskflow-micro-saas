@@ -39,7 +39,7 @@ resource "aws_cloudwatch_metric_alarm" "api_5xx_errors" {
 
 # Alarm: Lambda функция API - ошибки
 resource "aws_cloudwatch_metric_alarm" "lambda_api_errors" {
-  alarm_name          = "taskflow-dev-lambda-api-errors"
+  alarm_name          = "${var.project_name}-${var.stage}-lambda-api-errors"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "2"
   metric_name         = "Errors"

@@ -1,6 +1,5 @@
 # AWS Configuration
-aws_region  = "eu-central-1"
-aws_profile = "terraform-dev"
+aws_region = "eu-central-1"
 
 # Project Configuration
 project_name = "taskflow"
