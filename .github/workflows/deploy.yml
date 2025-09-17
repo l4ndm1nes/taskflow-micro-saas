@@ -96,7 +96,7 @@ jobs:
         echo "COGNITO_DOMAIN: $COGNITO_DOMAIN"
         echo "CLIENT_ID: $CLIENT_ID"
         echo "VITE_API_BASE=$API_URL" >> $GITHUB_ENV
-        echo "VITE_COGNITO_DOMAIN=https://$COGNITO_DOMAIN.auth.eu-central-1.amazoncognito.com" >> $GITHUB_ENV
+        echo "VITE_COGNITO_DOMAIN=$COGNITO_DOMAIN.auth.eu-central-1.amazoncognito.com" >> $GITHUB_ENV
         echo "VITE_COGNITO_CLIENT_ID=$CLIENT_ID" >> $GITHUB_ENV
 
     - name: Build frontend
