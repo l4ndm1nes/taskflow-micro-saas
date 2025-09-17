@@ -71,7 +71,7 @@ resource "random_id" "cog" {
 }
 
 resource "aws_cognito_user_pool_domain" "domain" {
-  domain       = "taskflow-dev-${random_id.cog.hex}"
+  domain       = "taskflow-auth-${random_id.cog.hex}"
   user_pool_id = aws_cognito_user_pool.this.id
 }
 
