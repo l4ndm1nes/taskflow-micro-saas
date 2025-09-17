@@ -70,8 +70,12 @@ resource "random_id" "cog" {
   byte_length = 2
 }
 
+resource "random_id" "auth_domain" {
+  byte_length = 4
+}
+
 resource "aws_cognito_user_pool_domain" "domain" {
-  domain       = "taskflow-auth-${random_id.cog.hex}"
+  domain       = "taskflow-auth-${random_id.auth_domain.hex}"
   user_pool_id = aws_cognito_user_pool.this.id
 }
 
